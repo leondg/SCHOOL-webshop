@@ -1,7 +1,7 @@
 <?php
 namespace Webshop\Model\Entity;
 
-class PaymentMethod implements EntityInterface
+class DiscountCode implements EntityInterface
 {
     /**
      * @var int
@@ -10,11 +10,23 @@ class PaymentMethod implements EntityInterface
     /**
      * @var string
      */
-    private $name;
+    private $code;
     /**
      * @var int
      */
     private $price;
+    /**
+     * @var string
+     */
+    private $name;
+    /**
+     * @var string
+     */
+    private $description;
+    /**
+     * @var int
+     */
+    private $reusable;
     /**
      * @var string
      */
@@ -28,41 +40,42 @@ class PaymentMethod implements EntityInterface
      */
     private $updatedOn;
 
-    /**
-     * @param $id
-     * @param $name
-     * @param $price
-     * @param $status
-     * @param $createdOn
-     * @param $updatedOn
-     */
     private function __construct(
         $id,
-        $name,
+        $code,
         $price,
+        $name,
+        $description,
+        $reusable,
         $status,
         $createdOn,
         $updatedOn
     )
     {
         $this->id = $id;
-        $this->name = $name;
+        $this->code = $code;
         $this->price = $price;
+        $this->name = $name;
+        $this->description = $description;
+        $this->reusable = $reusable;
         $this->status = $status;
         $this->createdOn = $createdOn;
         $this->updatedOn = $updatedOn;
     }
 
     /**
-     * @param $data
-     * @return PaymentMethod
+     * @param array $data
+     * @return self
      */
-    public static function deserialize($data)
+    public static function deserialize(array $data)
     {
         return new self(
             $data['id'],
-            $data['name'],
+            $data['code'],
             $data['price'],
+            $data['name'],
+            $data['description'],
+            $data['reusable'],
             $data['status'],
             $data['createdon'],
             $data['updatedon']
@@ -76,8 +89,11 @@ class PaymentMethod implements EntityInterface
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'code' => $this->code,
             'price' => $this->price,
+            'name' => $this->name,
+            'description' => $this->description,
+            'reusable' => $this->reusable,
             'status' => $this->status,
             'createdon' => $this->createdOn,
             'updatedon' => $this->updatedOn,
@@ -95,9 +111,9 @@ class PaymentMethod implements EntityInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getCode()
     {
-        return $this->name;
+        return $this->code;
     }
 
     /**
@@ -106,6 +122,30 @@ class PaymentMethod implements EntityInterface
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReusable()
+    {
+        return $this->reusable;
     }
 
     /**

@@ -49,6 +49,7 @@ class DatabaseCreateCommand extends Command
         $accountTable->addColumn('createdon', Type::DATETIME);
         $accountTable->addColumn('updatedon', Type::DATETIME);
         $accountTable->setPrimaryKey(['id']);
+        $accountTable->addUniqueIndex(['username']);
         $accountTable->addIndex(['email'], 'account_index');
 
         $accountAddressTable = $schema->createTable('account_address');
@@ -106,6 +107,7 @@ class DatabaseCreateCommand extends Command
         $discountCodeTable->addColumn('createdon', Type::DATETIME);
         $discountCodeTable->addColumn('updatedon', Type::DATETIME);
         $discountCodeTable->setPrimaryKey(['id']);
+        $discountCodeTable->addUniqueIndex(['code']);
 
         $orderTable = $schema->createTable('order');
         $orderTable->addColumn('id', Type::INTEGER, ['length' => 10, 'autoincrement' => true]);
@@ -135,6 +137,7 @@ class DatabaseCreateCommand extends Command
         $productTable->addColumn('createdon', Type::DATETIME);
         $productTable->addColumn('updatedon', Type::DATETIME);
         $productTable->setPrimaryKey(['id']);
+        $productTable->addUniqueIndex(['name']);
 
         $orderLineTable = $schema->createTable('order_line');
         $orderLineTable->addColumn('id', Type::INTEGER, ['length' => 10, 'autoincrement' => true]);

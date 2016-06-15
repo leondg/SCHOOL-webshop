@@ -1,20 +1,20 @@
 <?php
 namespace Webshop\Model\Entity;
 
-class PaymentMethod implements EntityInterface
+class SearchHistory implements EntityInterface
 {
     /**
      * @var int
      */
     private $id;
     /**
-     * @var string
-     */
-    private $name;
-    /**
      * @var int
      */
-    private $price;
+    private $account_id;
+    /**
+     * @var string
+     */
+    private $search;
     /**
      * @var string
      */
@@ -28,41 +28,33 @@ class PaymentMethod implements EntityInterface
      */
     private $updatedOn;
 
-    /**
-     * @param $id
-     * @param $name
-     * @param $price
-     * @param $status
-     * @param $createdOn
-     * @param $updatedOn
-     */
     private function __construct(
         $id,
-        $name,
-        $price,
+        $account_id,
+        $search,
         $status,
         $createdOn,
         $updatedOn
     )
     {
         $this->id = $id;
-        $this->name = $name;
-        $this->price = $price;
+        $this->account_id = $account_id;
+        $this->search = $search;
         $this->status = $status;
         $this->createdOn = $createdOn;
         $this->updatedOn = $updatedOn;
     }
 
     /**
-     * @param $data
-     * @return PaymentMethod
+     * @param array $data
+     * @return self
      */
-    public static function deserialize($data)
+    public static function deserialize(array $data)
     {
         return new self(
             $data['id'],
-            $data['name'],
-            $data['price'],
+            $data['account_id'],
+            $data['search'],
             $data['status'],
             $data['createdon'],
             $data['updatedon']
@@ -76,8 +68,8 @@ class PaymentMethod implements EntityInterface
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'price' => $this->price,
+            'account_id' => $this->account_id,
+            'search' => $this->search,
             'status' => $this->status,
             'createdon' => $this->createdOn,
             'updatedon' => $this->updatedOn,
@@ -93,19 +85,19 @@ class PaymentMethod implements EntityInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getName()
+    public function getAccountId()
     {
-        return $this->name;
+        return $this->account_id;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getPrice()
+    public function getSearch()
     {
-        return $this->price;
+        return $this->search;
     }
 
     /**

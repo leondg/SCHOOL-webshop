@@ -1,24 +1,24 @@
 <?php
 namespace Webshop\Model\Entity;
 
-class PaymentMethod implements EntityInterface
+class WishListLine implements EntityInterface
 {
     /**
      * @var int
      */
     private $id;
     /**
-     * @var string
+     * @var int
      */
-    private $name;
+    private $wish_list_id;
+    /**
+     * @var int
+     */
+    private $product_id;
     /**
      * @var int
      */
     private $price;
-    /**
-     * @var string
-     */
-    private $status;
     /**
      * @var string
      */
@@ -28,42 +28,27 @@ class PaymentMethod implements EntityInterface
      */
     private $updatedOn;
 
-    /**
-     * @param $id
-     * @param $name
-     * @param $price
-     * @param $status
-     * @param $createdOn
-     * @param $updatedOn
-     */
-    private function __construct(
-        $id,
-        $name,
-        $price,
-        $status,
-        $createdOn,
-        $updatedOn
-    )
+    private function __construct($id, $wish_list_id, $product_id, $price, $createdOn, $updatedOn)
     {
         $this->id = $id;
-        $this->name = $name;
+        $this->wish_list_id = $wish_list_id;
+        $this->product_id = $product_id;
         $this->price = $price;
-        $this->status = $status;
         $this->createdOn = $createdOn;
         $this->updatedOn = $updatedOn;
     }
 
     /**
-     * @param $data
-     * @return PaymentMethod
+     * @param array $data
+     * @return self
      */
-    public static function deserialize($data)
+    public static function deserialize(array $data)
     {
         return new self(
             $data['id'],
-            $data['name'],
+            $data['wish_list_id'],
+            $data['product_id'],
             $data['price'],
-            $data['status'],
             $data['createdon'],
             $data['updatedon']
         );
@@ -76,9 +61,9 @@ class PaymentMethod implements EntityInterface
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'wish_list_id' => $this->wish_list_id,
+            'product_id' => $this->product_id,
             'price' => $this->price,
-            'status' => $this->status,
             'createdon' => $this->createdOn,
             'updatedon' => $this->updatedOn,
         ];
@@ -93,11 +78,19 @@ class PaymentMethod implements EntityInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getName()
+    public function getWishListId()
     {
-        return $this->name;
+        return $this->wish_list_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProductId()
+    {
+        return $this->product_id;
     }
 
     /**
@@ -106,14 +99,6 @@ class PaymentMethod implements EntityInterface
     public function getPrice()
     {
         return $this->price;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**

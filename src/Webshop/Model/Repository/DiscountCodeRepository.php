@@ -1,16 +1,16 @@
 <?php
 namespace Webshop\Model\Repository;
 
-use Webshop\Model\Entity\Product;
+use Webshop\Model\Entity\DiscountCode;
 
-class ProductRepository extends AbstractRepository
+class DiscountCodeRepository extends AbstractRepository
 {
     /**
      * @return string
      */
     public function tableName()
     {
-        return 'product';
+        return 'discount_code';
     }
 
     /**
@@ -18,6 +18,6 @@ class ProductRepository extends AbstractRepository
      */
     public function tableClass()
     {
-        return Product::class;
+        return DiscountCode::class;
     }
 }

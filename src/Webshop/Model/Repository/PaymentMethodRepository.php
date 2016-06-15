@@ -1,37 +1,23 @@
 <?php
 namespace Webshop\Model\Repository;
 
-use Doctrine\DBAL\Connection;
 use Webshop\Model\Entity\PaymentMethod;
 
-class PaymentMethodRepository
+class PaymentMethodRepository extends AbstractRepository
 {
     /**
-     * @var Connection
+     * @return string
      */
-    private $connection;
-
-    /**
-     * @param Connection $connection
-     */
-    public function __construct(Connection $connection)
+    public function tableName()
     {
-        $this->connection = $connection;
+        return 'payment_method';
     }
 
     /**
-     * @return PaymentMethod[]
+     * @return string
      */
-    public function findAll()
+    public function tableClass()
     {
-        $sql = 'SELECT * FROM payment_method';
-        $records = $this->connection->fetchAll($sql);
-
-        $paymentMethods = [];
-        foreach ($records as $record) {
-            $paymentMethods[] = PaymentMethod::deserialize($record);
-        }
-
-        return $paymentMethods;
+        return PaymentMethod::class;
     }
 }

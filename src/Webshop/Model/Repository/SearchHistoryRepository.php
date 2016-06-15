@@ -1,16 +1,16 @@
 <?php
 namespace Webshop\Model\Repository;
 
-use Webshop\Model\Entity\Product;
+use Webshop\Model\Entity\SearchHistory;
 
-class ProductRepository extends AbstractRepository
+class SearchHistoryRepository extends AbstractRepository
 {
     /**
      * @return string
      */
     public function tableName()
     {
-        return 'product';
+        return 'search_history';
     }
 
     /**
@@ -18,6 +18,6 @@ class ProductRepository extends AbstractRepository
      */
     public function tableClass()
     {
-        return Product::class;
+        SearchHistory::class;
     }
 }

@@ -1,16 +1,16 @@
 <?php
 namespace Webshop\Model\Repository;
 
-use Webshop\Model\Entity\Product;
+use Webshop\Model\Entity\WishList;
 
-class ProductRepository extends AbstractRepository
+class WishListRepository extends AbstractRepository
 {
     /**
      * @return string
      */
     public function tableName()
     {
-        return 'product';
+        return 'wish_list';
     }
 
     /**
@@ -18,6 +18,6 @@ class ProductRepository extends AbstractRepository
      */
     public function tableClass()
     {
-        return Product::class;
+        return WishList::class;
     }
 }

@@ -1,20 +1,20 @@
 <?php
 namespace Webshop\Model\Entity;
 
-class PaymentMethod implements EntityInterface
+class WishList implements EntityInterface
 {
     /**
      * @var int
      */
     private $id;
     /**
+     * @var int
+     */
+    private $account_id;
+    /**
      * @var string
      */
     private $name;
-    /**
-     * @var int
-     */
-    private $price;
     /**
      * @var string
      */
@@ -28,41 +28,33 @@ class PaymentMethod implements EntityInterface
      */
     private $updatedOn;
 
-    /**
-     * @param $id
-     * @param $name
-     * @param $price
-     * @param $status
-     * @param $createdOn
-     * @param $updatedOn
-     */
     private function __construct(
         $id,
+        $account_id,
         $name,
-        $price,
         $status,
         $createdOn,
         $updatedOn
     )
     {
         $this->id = $id;
+        $this->account_id = $account_id;
         $this->name = $name;
-        $this->price = $price;
         $this->status = $status;
         $this->createdOn = $createdOn;
         $this->updatedOn = $updatedOn;
     }
-
+    
     /**
-     * @param $data
-     * @return PaymentMethod
+     * @param array $data
+     * @return self
      */
-    public static function deserialize($data)
+    public static function deserialize(array $data)
     {
         return new self(
             $data['id'],
+            $data['account_id'],
             $data['name'],
-            $data['price'],
             $data['status'],
             $data['createdon'],
             $data['updatedon']
@@ -76,8 +68,8 @@ class PaymentMethod implements EntityInterface
     {
         return [
             'id' => $this->id,
+            'account_id' => $this->account_id,
             'name' => $this->name,
-            'price' => $this->price,
             'status' => $this->status,
             'createdon' => $this->createdOn,
             'updatedon' => $this->updatedOn,
@@ -93,19 +85,19 @@ class PaymentMethod implements EntityInterface
     }
 
     /**
+     * @return int
+     */
+    public function getAccountId()
+    {
+        return $this->account_id;
+    }
+
+    /**
      * @return string
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**
