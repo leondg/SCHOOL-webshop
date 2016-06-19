@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class WishList implements EntityInterface
@@ -35,8 +36,7 @@ class WishList implements EntityInterface
         $status,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->account_id = $account_id;
         $this->name = $name;
@@ -44,9 +44,10 @@ class WishList implements EntityInterface
         $this->createdOn = $createdOn;
         $this->updatedOn = $updatedOn;
     }
-    
+
     /**
      * @param array $data
+     *
      * @return self
      */
     public static function deserialize(array $data)

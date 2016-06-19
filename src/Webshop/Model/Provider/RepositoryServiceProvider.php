@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Provider;
 
 use Pimple\Container;
@@ -18,7 +19,7 @@ class RepositoryServiceProvider implements ServiceProviderInterface
     {
         $connection = $app['db'];
 
-        $app['repositories'] = function($app) use ($connection) {
+        $app['repositories'] = function ($app) use ($connection) {
             $classes = $app['repository.classes'];
 
             $repositories = [];

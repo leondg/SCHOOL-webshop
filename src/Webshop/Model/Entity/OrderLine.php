@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class OrderLine implements EntityInterface
@@ -40,8 +41,7 @@ class OrderLine implements EntityInterface
         $status,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->order_id = $order_id;
         $this->product_id = $product_id;
@@ -53,6 +53,7 @@ class OrderLine implements EntityInterface
 
     /**
      * @param array $data
+     *
      * @return OrderLine
      */
     public static function deserialize(array $data)

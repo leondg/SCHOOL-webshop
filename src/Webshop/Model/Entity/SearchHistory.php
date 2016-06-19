@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class SearchHistory implements EntityInterface
@@ -35,8 +36,7 @@ class SearchHistory implements EntityInterface
         $status,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->account_id = $account_id;
         $this->search = $search;
@@ -47,6 +47,7 @@ class SearchHistory implements EntityInterface
 
     /**
      * @param array $data
+     *
      * @return self
      */
     public static function deserialize(array $data)

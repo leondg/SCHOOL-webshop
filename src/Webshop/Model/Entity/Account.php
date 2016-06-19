@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class Account implements EntityInterface
@@ -60,8 +61,7 @@ class Account implements EntityInterface
         $status,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->username = $username;
         $this->password = $password;

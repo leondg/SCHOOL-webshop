@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class AccountAddress implements EntityInterface
@@ -60,8 +61,7 @@ class AccountAddress implements EntityInterface
         $status,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->account_id = $account_id;
         $this->name = $name;

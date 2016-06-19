@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class Order implements EntityInterface
@@ -50,8 +51,7 @@ class Order implements EntityInterface
         $paymentStatus,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->account_id = $account_id;
         $this->payment_method_id = $payment_method_id;
@@ -65,6 +65,7 @@ class Order implements EntityInterface
 
     /**
      * @param array $data
+     *
      * @return Order
      */
     public static function deserialize(array $data)

@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class PaymentMethod implements EntityInterface
@@ -43,8 +44,7 @@ class PaymentMethod implements EntityInterface
         $status,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;
@@ -55,6 +55,7 @@ class PaymentMethod implements EntityInterface
 
     /**
      * @param $data
+     *
      * @return PaymentMethod
      */
     public static function deserialize($data)

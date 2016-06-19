@@ -1,9 +1,11 @@
 <?php
+
 namespace Webshop\Controller;
 
 use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
 use Silex\ControllerCollection;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Twig_Environment;
 use Webshop\Model\Repository\AbstractRepository;
 
@@ -15,9 +17,23 @@ abstract class AbstractController implements ControllerProviderInterface
     protected $twig;
 
     /**
+     * @var Session
+     */
+    protected $session;
+
+    /**
      * @var array
      */
     private $repositories;
+
+    /**
+     */
+    abstract protected function init();
+
+    /**
+     * @param ControllerCollection $controllers
+     */
+    abstract protected function routes(ControllerCollection $controllers);
 
     /**
      * Returns routes to connect to the given application.
@@ -29,11 +45,14 @@ abstract class AbstractController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $this->twig = $app['twig'];
+        $this->session = $app['session'];
         $this->repositories = $app['repositories'];
+        $this->init();
 
         /** @var ControllerCollection $controllers */
         $controllers = $app['controllers_factory'];
-        return $this->defineRoutes($controllers);
+
+        return $this->routes($controllers);
     }
 
     /**
@@ -45,9 +64,4 @@ abstract class AbstractController implements ControllerProviderInterface
     {
         return $this->repositories[$repository];
     }
-
-    /**
-     * @param ControllerCollection $controllers
-     */
-    abstract protected function defineRoutes(ControllerCollection $controllers);
 }

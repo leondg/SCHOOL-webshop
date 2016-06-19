@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class DiscountCode implements EntityInterface
@@ -50,8 +51,7 @@ class DiscountCode implements EntityInterface
         $status,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->code = $code;
         $this->price = $price;
@@ -65,6 +65,7 @@ class DiscountCode implements EntityInterface
 
     /**
      * @param array $data
+     *
      * @return self
      */
     public static function deserialize(array $data)

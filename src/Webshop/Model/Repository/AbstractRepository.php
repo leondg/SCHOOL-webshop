@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Repository;
 
 use Doctrine\DBAL\Connection;
@@ -9,7 +10,7 @@ abstract class AbstractRepository
     /**
      * @var Connection
      */
-    private $db;
+    protected $db;
 
     /**
      * @return string
@@ -55,6 +56,7 @@ abstract class AbstractRepository
 
     /**
      * @param $id
+     *
      * @return array
      */
     public function find($id)
@@ -75,6 +77,7 @@ abstract class AbstractRepository
 
     /**
      * @param array $data
+     *
      * @return int
      */
     public function insert(array $data)
@@ -85,6 +88,7 @@ abstract class AbstractRepository
     /**
      * @param array $data
      * @param array $identifier
+     *
      * @return int
      */
     public function update(array $data, array $identifier)
@@ -94,6 +98,7 @@ abstract class AbstractRepository
 
     /**
      * @param array $identifier
+     *
      * @return int
      */
     public function delete(array $identifier)

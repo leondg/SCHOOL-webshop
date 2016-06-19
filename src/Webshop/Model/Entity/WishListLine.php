@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class WishListLine implements EntityInterface
@@ -40,6 +41,7 @@ class WishListLine implements EntityInterface
 
     /**
      * @param array $data
+     *
      * @return self
      */
     public static function deserialize(array $data)

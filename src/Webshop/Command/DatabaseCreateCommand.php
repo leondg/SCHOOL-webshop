@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Command;
 
 use Doctrine\DBAL\Connection;

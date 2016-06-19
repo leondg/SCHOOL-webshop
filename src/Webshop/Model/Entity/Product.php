@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Entity;
 
 class Product implements EntityInterface
@@ -60,8 +61,7 @@ class Product implements EntityInterface
         $status,
         $createdOn,
         $updatedOn
-    )
-    {
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->brand = $brand;
@@ -77,6 +77,7 @@ class Product implements EntityInterface
 
     /**
      * @param array $data
+     *
      * @return Product
      */
     public static function deserialize(array $data)
