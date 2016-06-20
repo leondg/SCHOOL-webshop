@@ -57,7 +57,7 @@ abstract class AbstractRepository
     /**
      * @param $id
      *
-     * @return array
+     * @return EntityInterface
      */
     public function find($id)
     {

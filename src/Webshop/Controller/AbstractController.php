@@ -5,12 +5,18 @@ namespace Webshop\Controller;
 use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
 use Silex\ControllerCollection;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Twig_Environment;
 use Webshop\Model\Repository\AbstractRepository;
 
 abstract class AbstractController implements ControllerProviderInterface
 {
+    /**
+     * @var Application
+     */
+    private $app;
+
     /**
      * @var Twig_Environment
      */
@@ -20,11 +26,6 @@ abstract class AbstractController implements ControllerProviderInterface
      * @var Session
      */
     protected $session;
-
-    /**
-     * @var array
-     */
-    private $repositories;
 
     /**
      */
@@ -44,9 +45,9 @@ abstract class AbstractController implements ControllerProviderInterface
      */
     public function connect(Application $app)
     {
+        $this->app = $app;
         $this->twig = $app['twig'];
         $this->session = $app['session'];
-        $this->repositories = $app['repositories'];
         $this->init();
 
         /** @var ControllerCollection $controllers */
@@ -62,6 +63,16 @@ abstract class AbstractController implements ControllerProviderInterface
      */
     public function getRepository($repository)
     {
-        return $this->repositories[$repository];
+        return $this->app['repositories'][$repository];
+    }
+
+    /**
+     * @param $url
+     *
+     * @return RedirectResponse
+     */
+    public function redirect($url)
+    {
+        return $this->app->redirect($url);
     }
 }

@@ -4,6 +4,9 @@ namespace Webshop\Controller;
 
 use Silex\ControllerCollection;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
+use Webshop\Exception\ProductNotEnabled;
+use Webshop\Exception\ProductNotFound;
+use Webshop\Model\Entity\Product;
 use Webshop\Model\Repository\ProductRepository;
 use Webshop\Model\Service\Cart;
 
@@ -42,22 +45,35 @@ class CartController extends AbstractController
 
     public function index()
     {
-        $products = [];
+        $cartItems = [];
+        $totalPrice = 0;
         foreach ($this->cart->getItems() as $key => $value) {
-            $products[] = $this->product->find($key);
+            /** @var Product $product */
+            $product = $this->product->find($key);
+            $price = $product->getPrice() * $value;
+            $cartItems[] = ['product' => $product, 'amount' => $value, 'price' => $price];
+            $totalPrice += $price;
         }
 
-        return $this->twig->render('cart/index.twig', ['products' => $products]);
+        $context['cartItems'] = $cartItems;
+        $context['totalPrice'] = $totalPrice;
+
+        return $this->twig->render('cart/index.twig', $context);
     }
 
     public function add($id)
     {
-        if (!$this->product->exists($id)) {
-            throw new InvalidParameterException('The product you are trying to add doesnt exist.');
+        /** @var Product $product */
+        if (!$product = $this->product->find($id)) {
+            throw new ProductNotFound('The product you are trying to add does not exist.');
+        }
+
+        if ($product->getStatus() !== Product::STATUS_ENABLED) {
+            throw new ProductNotEnabled('The product you are trying to add is disabled.');
         }
 
         $this->cart->addItem($id, 1);
 
-        return 'cart-add';
+        return $this->redirect('/cart');
     }
 }
