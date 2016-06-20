@@ -57,7 +57,7 @@ abstract class AbstractRepository
     /**
      * @param $id
      *
-     * @return array
+     * @return EntityInterface
      */
     public function find($id)
     {
@@ -69,10 +69,31 @@ abstract class AbstractRepository
             [(int) $id]
         );
 
+        if (!$record) {
+            return;
+        }
+
         /** @var EntityInterface $className */
         $className = $this->tableClass();
 
         return $className::deserialize($record);
+    }
+
+    public function exists($id)
+    {
+        $record = $this->db->fetchAssoc(
+            sprintf(
+                'SELECT 1 FROM %s WHERE id = ?',
+                $this->tableName()
+            ),
+            [(int) $id]
+        );
+
+        if (!$record) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

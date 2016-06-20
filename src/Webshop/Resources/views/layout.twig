@@ -2,17 +2,18 @@
 <head>
     <title>Avans Webshop - {% block title %}Home{% endblock %}</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/webshop.css" rel="stylesheet">
     <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <img src="/images/webwinkel-logo.jpg"/>
-
-        <input type="text" placeholder="zoekterm"/><input type="submit" value="zoeken"/>
+    <div id="header">
+        <div class="container">
+            <img src="/images/webwinkel-logo.jpg"/>
+            <input type="text" placeholder="zoekterm"/><input type="submit" value="zoeken"/>
+        </div>
 
         <nav class="navbar navbar-default">
-            <div class="container-fluid">
+            <div class="container">
 
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -34,7 +35,9 @@
                 </div>
             </div>
         </nav>
+    </div>
 
+    <div class="container">
         {% block content %}{% endblock %}
     </div>
 </body>
