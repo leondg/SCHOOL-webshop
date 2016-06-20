@@ -11,3 +11,7 @@ body {
 #header {
     background: #ffffff !important;
 }
+
+.table tbody>tr>td.vert-align-middle {
+    vertical-align: middle;
+}
