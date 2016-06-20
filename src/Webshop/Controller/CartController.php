@@ -1,7 +1,10 @@
 <?php
+
 namespace Webshop\Controller;
 
 use Silex\ControllerCollection;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
+use Webshop\Model\Repository\ProductRepository;
 use Webshop\Model\Service\Cart;
 
 class CartController extends AbstractController
@@ -12,10 +15,16 @@ class CartController extends AbstractController
     private $cart;
 
     /**
+     * @var ProductRepository
+     */
+    private $product;
+
+    /**
      */
     protected function init()
     {
         $this->cart = new Cart($this->session);
+        $this->product = $this->getRepository('product');
     }
 
     /**
@@ -33,11 +42,20 @@ class CartController extends AbstractController
 
     public function index()
     {
-        return print_r($this->cart->getItems(), true);
+        $products = [];
+        foreach ($this->cart->getItems() as $key => $value) {
+            $products[] = $this->product->find($key);
+        }
+
+        return $this->twig->render('cart/index.twig', ['products' => $products]);
     }
 
     public function add($id)
     {
+        if (!$this->product->exists($id)) {
+            throw new InvalidParameterException('The product you are trying to add doesnt exist.');
+        }
+
         $this->cart->addItem($id, 1);
 
         return 'cart-add';

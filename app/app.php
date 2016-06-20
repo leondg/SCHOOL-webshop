@@ -32,10 +32,10 @@ $app->register(new MonologServiceProvider(), [
 $app->register(new DoctrineServiceProvider(), [
     'db.options' => [
         'driver' => 'pdo_mysql',
-        'host' => 'localhost',
-        'dbname' => 'webshop',
-        'user' => 'webshop',
-        'password' => 'avans',
+        'host' => '10.0.0.3',
+        'dbname' => 'leon_avans_webshop',
+        'user' => 'leon',
+        'password' => 'halloWereld',
     ],
 ]);
 
