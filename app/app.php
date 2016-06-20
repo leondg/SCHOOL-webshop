@@ -17,6 +17,7 @@ use Webshop\Model\Repository\ProductRepository;
 use Webshop\Model\Repository\SearchHistoryRepository;
 use Webshop\Model\Repository\WishListLineRepository;
 use Webshop\Model\Repository\WishListRepository;
+use Webshop\Resources\Extension\TwigExtension;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -32,10 +33,10 @@ $app->register(new MonologServiceProvider(), [
 $app->register(new DoctrineServiceProvider(), [
     'db.options' => [
         'driver' => 'pdo_mysql',
-        'host' => '10.0.0.3',
-        'dbname' => 'leon_avans_webshop',
-        'user' => 'leon',
-        'password' => 'halloWereld',
+        'host' => 'localhost',
+        'dbname' => 'webshop',
+        'user' => 'webshop',
+        'password' => 'avans',
     ],
 ]);
 
@@ -59,5 +60,11 @@ $app->register(new ServiceControllerServiceProvider());
 $app->register(new TwigServiceProvider(), [
     'twig.path' => __DIR__.'/../src/Webshop/Resources/views',
 ]);
+
+$app['twig'] = $app->extend('twig', function(Twig_Environment $twig, $app) {
+    $twig->addExtension(new TwigExtension($app));
+
+    return $twig;
+});
 
 return $app;
