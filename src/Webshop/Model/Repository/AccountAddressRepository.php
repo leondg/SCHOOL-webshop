@@ -21,4 +21,26 @@ class AccountAddressRepository extends AbstractRepository
     {
         AccountAddress::class;
     }
+
+    public function findByAccount($account)
+    {
+        $records = $this->db->fetchAll(
+            sprintf(
+                'SELECT * FROM %s WHERE account_id = ?',
+                $this->tableName()
+            ),
+            [(string) $account]
+        );
+
+        $result = [];
+        if (!is_array($records)) {
+            return $result;
+        }
+
+        foreach ($records as $record) {
+            $result[] = AccountAddress::deserialize($record);
+        }
+
+        return $result;
+    }
 }
