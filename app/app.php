@@ -35,8 +35,8 @@ $app->register(new DoctrineServiceProvider(), [
         'driver' => 'pdo_mysql',
         'host' => 'localhost',
         'dbname' => 'webshop',
-        'user' => 'webshop',
-        'password' => 'avans',
+        'user' => 'admin',
+        'password' => 'admin',
     ],
 ]);
 

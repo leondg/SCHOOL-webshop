@@ -12,5 +12,6 @@ if (!$app instanceof Application) {
 
 $app->mount('/', new MainController());
 $app->mount('/cart', new CartController());
+$app->mount('/admin', new AdminController());
 
 $app->run();
