@@ -66,6 +66,11 @@ abstract class AbstractController implements ControllerProviderInterface
         return $this->app['repositories'][$repository];
     }
 
+    public function render($name, array $context = [])
+    {
+        return $this->twig->render($name, $context);
+    }
+
     /**
      * @param $url
      *

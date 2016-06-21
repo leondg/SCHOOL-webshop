@@ -2,44 +2,45 @@
 
 {% block content %}
     {% if cartItems is empty %}
-    <div class="panel panel-default">
-        <div class="panel-body">Uw winkelwagen is leeg.</div>
-    </div>
-
+        <div class="panel panel-default">
+            <div class="panel-body">Uw winkelwagen is leeg.</div>
+        </div>
     {% else %}
-    <div class="panel panel-default">
-        <table class="table">
-            <caption>Winkelwagen</caption>
-            <thead>
-                <tr>
-                    <th>Product</th><th class="text-right">Prijs</th><th class="text-right">Aantal</th><th class="text-right">Totaal</th><th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cartItem in cartItems %}
-                <tr>
-                    <td>
-                        {{ cartItem.product.name }} <br/>
-                        <span class="text-muted">{{ cartItem.product.brand }}</span>
-                    </td>
-                    <td class="vert-align-middle text-right">
+        <div class="panel panel-default">
+            <table class="table">
+                <caption>Winkelwagen</caption>
+                <thead>
+                    <tr>
+                        <th>Product</th><th class="text-right">Prijs</th><th class="text-right">Aantal</th><th class="text-right">Totaal</th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cartItem in cartItems %}
+                    <tr>
+                        <td>
+                            {{ cartItem.product.name }} <br/>
+                            <span class="text-muted">{{ cartItem.product.brand }}</span>
+                        </td>
+                        <td class="vert-align-middle text-right">
 
-                        {{ price(cartItem.product.price) }}
-                    </td>
-                    <td class="vert-align-middle text-right">
-                        <input type="text" value="{{ cartItem.amount }}"/>
-                    </td>
-                    <td class="vert-align-middle text-right">
-                        {{ price(cartItem.price) }}
-                    </td>
-                    <td class="vert-align-middle text-center"><a href="{{ path('cart-remove', {id: cartItem.product.id}) }}"><span class="glyphicon glyphicon-remove"></span></a></td>
-                </tr>
-                {% endfor %}
-                <tr>
-                    <td class="text-right" colspan="3"><strong>Totaal: </strong></td><td class="text-right"><strong>{{ price(totalPrice) }}</strong></td><td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                            {{ price(cartItem.product.price) }}
+                        </td>
+                        <td class="vert-align-middle text-right">
+                            <input type="text" value="{{ cartItem.amount }}"/>
+                        </td>
+                        <td class="vert-align-middle text-right">
+                            {{ price(cartItem.price) }}
+                        </td>
+                        <td class="vert-align-middle text-center"><a href="{{ path('cart-remove', {id: cartItem.product.id}) }}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td class="text-right" colspan="3"><strong>Totaal: </strong></td><td class="text-right"><strong>{{ price(totalPrice) }}</strong></td><td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button type="button" class="btn btn-default">Afrekenen</button>
     {% endif %}
 {% endblock %}
