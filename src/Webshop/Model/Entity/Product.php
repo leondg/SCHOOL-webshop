@@ -6,7 +6,7 @@ class Product implements EntityInterface
 {
     const STATUS_ENABLED = 'enabled';
     const STATUS_DISABLED = 'disabled';
-    
+
     /**
      * @var int
      */

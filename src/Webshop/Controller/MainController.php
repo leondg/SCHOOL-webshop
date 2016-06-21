@@ -48,7 +48,7 @@ class MainController extends AbstractController
      */
     public function index()
     {
-        $context['products'] = $this->products->findAll();
+        $context['products'] = $this->products->findBySpotlight();
 
         return $this->twig->render('main/index.twig', $context);
     }
