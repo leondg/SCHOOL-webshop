@@ -61,7 +61,7 @@ $app->register(new TwigServiceProvider(), [
     'twig.path' => __DIR__.'/../src/Webshop/Resources/views',
 ]);
 
-$app['twig'] = $app->extend('twig', function(Twig_Environment $twig, $app) {
+$app['twig'] = $app->extend('twig', function (Twig_Environment $twig, $app) {
     $twig->addExtension(new TwigExtension($app));
 
     return $twig;

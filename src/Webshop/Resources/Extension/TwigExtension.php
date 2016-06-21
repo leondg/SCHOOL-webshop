@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Resources\Extension;
 
 use Twig_Extension;
@@ -27,6 +28,7 @@ class TwigExtension extends Twig_Extension
         if (substr($value, -2) == '00') {
             return '€ '.number_format(bcdiv($value, '100', 2), 0, ',', '.').',-';
         }
+
         return '€ '.number_format(bcdiv($value, '100', 2), 2, ',', '.');
     }
 }
