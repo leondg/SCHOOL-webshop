@@ -1,5 +1,6 @@
 <?php
 
+use Admin\Controller\AdminController;
 use Silex\Application;
 use Webshop\Controller\CartController;
 use Webshop\Controller\MainController;
@@ -10,8 +11,9 @@ if (!$app instanceof Application) {
     throw new RuntimeException('Failed to initialize application.');
 }
 
+$app->mount('/admin', new AdminController());
+
 $app->mount('/', new MainController());
 $app->mount('/cart', new CartController());
-$app->mount('/admin', new AdminController());
 
 $app->run();
