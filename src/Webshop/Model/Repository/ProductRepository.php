@@ -22,6 +22,27 @@ class ProductRepository extends AbstractRepository
         return Product::class;
     }
 
+    public function findBySpotlight()
+    {
+        $records = $this->db->fetchAll(
+            sprintf(
+                'SELECT * FROM %s WHERE spotlight = 1',
+                $this->tableName()
+            )
+        );
+
+        $products = [];
+        if (!is_array($records)) {
+            return $products;
+        }
+
+        foreach ($records as $record) {
+            $products[] = Product::deserialize($record);
+        }
+
+        return $products;
+    }
+
     /**
      * @param $category
      *

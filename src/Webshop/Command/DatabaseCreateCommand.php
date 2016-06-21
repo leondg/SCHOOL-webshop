@@ -135,10 +135,12 @@ class DatabaseCreateCommand extends Command
         $productTable->addColumn('stock', Type::INTEGER, ['length' => 10]);
         $productTable->addColumn('options', Type::TEXT, ['notnull' => false]);
         $productTable->addColumn('status', Type::STRING, ['length' => 20]);
+        $productTable->addColumn('spotlight', Type::INTEGER, ['length' => 1, 'notnull' => false]);
         $productTable->addColumn('createdon', Type::DATETIME);
         $productTable->addColumn('updatedon', Type::DATETIME);
         $productTable->setPrimaryKey(['id']);
         $productTable->addUniqueIndex(['name']);
+        $productTable->addIndex(['status']);
 
         $orderLineTable = $schema->createTable('order_line');
         $orderLineTable->addColumn('id', Type::INTEGER, ['length' => 10, 'autoincrement' => true]);

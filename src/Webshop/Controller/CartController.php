@@ -3,7 +3,6 @@
 namespace Webshop\Controller;
 
 use Silex\ControllerCollection;
-use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Webshop\Exception\ProductNotEnabled;
 use Webshop\Exception\ProductNotFound;
 use Webshop\Model\Entity\Product;
@@ -39,6 +38,7 @@ class CartController extends AbstractController
     {
         $controllers->get('/', [$this, 'index'])->bind('cart-index');
         $controllers->get('/add/{id}', [$this, 'add'])->bind('cart-add');
+        $controllers->get('/remove/{id}', [$this, 'remove'])->bind('cart-remove');
 
         return $controllers;
     }
@@ -69,10 +69,17 @@ class CartController extends AbstractController
         }
 
         if ($product->getStatus() !== Product::STATUS_ENABLED) {
-            throw new ProductNotEnabled('The product you are trying to add is disabled.');
+            throw new ProductNotEnabled('The product you are trying to add is not enabled.');
         }
 
         $this->cart->addItem($id, 1);
+
+        return $this->redirect('/cart');
+    }
+
+    public function remove($id)
+    {
+        $this->cart->removeItem($id);
 
         return $this->redirect('/cart');
     }
