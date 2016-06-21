@@ -58,7 +58,10 @@ $app->register(new RepositoryServiceProvider(), [
 $app->register(new ServiceControllerServiceProvider());
 
 $app->register(new TwigServiceProvider(), [
-    'twig.path' => __DIR__.'/../src/Webshop/Resources/views',
+    'twig.path' => [
+        __DIR__.'/../src/Webshop/Resources/views',
+        __DIR__.'/../src/Admin/Resources/views',
+    ],
 ]);
 
 $app['twig'] = $app->extend('twig', function (Twig_Environment $twig, $app) {

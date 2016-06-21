@@ -1,11 +1,9 @@
 <?php
-use Webshop\Controller;
-/**
- * Created by PhpStorm.
- * User: Rik
- * Date: 19-6-2016
- * Time: 23:56
- */
+namespace Admin\Controller;
+
+use Silex\ControllerCollection;
+use Webshop\Controller\AbstractController;
+
 class AdminController extends AbstractController
 {
     private $accounts;
@@ -25,9 +23,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @param \Silex\ControllerCollection $controllers
+     * @param ControllerCollection $controllers
+     *
+     * @return ControllerCollection
      */
-    protected function routes(\Silex\ControllerCollection $controllers)
+    protected function routes(ControllerCollection $controllers)
     {
         $controllers->get('/', [$this, 'index'])->bind('admin.index');
         $controllers->get('/accounts', [$this, 'accounts'])->bind('admin.accounts');
@@ -38,6 +38,8 @@ class AdminController extends AbstractController
         $controllers->get('/searchhistory', [$this, 'searchhistory'])->bind('admin.searchhistory');
         $controllers->get('/orders', [$this, 'orders'])->bind('admin.orders');
         $controllers->get('/orders/{order}', [$this, 'orderEdit'])->bind('admin.orders.edit');
+
+        return $controllers;
     }
 
     public function index()
