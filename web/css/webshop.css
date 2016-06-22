@@ -14,8 +14,45 @@ body {
     height: 132px;
 }
 
-#header .glyphicon {
+#header .logo {
+    height: 90px;
+    width: 270px;
+}
+
+#header .search-field {
+    margin: 0 auto;
+    height: 90px;
+    width: 600px;
+}
+
+#header .search-bar {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#header .search-bar input[type='text'] {
+    width: 400px;
+}
+
+#header .links {
+    height: 90px;
+    width: 270px;
+    text-align: right;
+}
+
+#header .link-icons {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#header .links .glyphicon {
     font-size: 40px;
+    margin: 10px;
 }
 
 .table tbody>tr>td.vert-align-middle {
