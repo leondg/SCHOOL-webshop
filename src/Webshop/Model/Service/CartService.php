@@ -4,7 +4,7 @@ namespace Webshop\Model\Service;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class Cart
+class CartService
 {
     /**
      * @var Session

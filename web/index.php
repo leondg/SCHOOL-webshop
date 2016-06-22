@@ -2,6 +2,8 @@
 
 use Admin\Controller\AdminController;
 use Silex\Application;
+use Webshop\Controller\AccountController;
+use Webshop\Controller\AuthController;
 use Webshop\Controller\CartController;
 use Webshop\Controller\MainController;
 
@@ -14,6 +16,8 @@ if (!$app instanceof Application) {
 $app->mount('/admin', new AdminController());
 
 $app->mount('/', new MainController());
+$app->mount('/account', new AccountController());
+$app->mount('/auth', new AuthController());
 $app->mount('/cart', new CartController());
 
 $app->run();

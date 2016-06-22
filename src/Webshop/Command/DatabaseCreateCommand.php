@@ -128,6 +128,7 @@ class DatabaseCreateCommand extends Command
         $productTable = $schema->createTable('product');
         $productTable->addColumn('id', Type::INTEGER, ['length' => 10, 'autoincrement' => true]);
         $productTable->addColumn('name', Type::STRING, ['length' => 100]);
+        $productTable->addColumn('fullname', Type::STRING, ['length' => 100, 'notnull' => false]);
         $productTable->addColumn('brand', Type::STRING, ['length' => 40, 'notnull' => false]);
         $productTable->addColumn('category', Type::STRING, ['length' => 20, 'notnull' => false]);
         $productTable->addColumn('price', Type::INTEGER, ['length' => 10]);

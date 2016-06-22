@@ -10,8 +10,41 @@ body {
 
 #header {
     background: #ffffff !important;
+    padding: 18px 0;
+    height: 132px;
 }
 
 .table tbody>tr>td.vert-align-middle {
     vertical-align: middle;
+}
+
+.spotlight-item {
+    height: 282px;
+    overflow: hidden;
+}
+
+.spotlight-image {
+    text-align: center;
+    height: 160px;
+}
+
+.spotlight-image img {
+    max-height: 100%;
+}
+
+.table-cart .cart-image {
+    width: 80px;
+}
+
+.table-cart .cart-image img {
+    display: block;
+    margin: auto;
+    height: 48px;
+}
+
+.table-cart .cart-amount input {
+    text-align: right;
+    padding-left: 4px;
+    padding-right: 4px;
+    width: 40px;
 }

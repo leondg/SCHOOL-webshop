@@ -3,6 +3,7 @@
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -17,6 +18,7 @@ use Webshop\Model\Repository\ProductRepository;
 use Webshop\Model\Repository\SearchHistoryRepository;
 use Webshop\Model\Repository\WishListLineRepository;
 use Webshop\Model\Repository\WishListRepository;
+use Webshop\Model\Service\UserService;
 use Webshop\Resources\Extension\TwigExtension;
 
 require __DIR__.'/../vendor/autoload.php';
@@ -56,6 +58,22 @@ $app->register(new RepositoryServiceProvider(), [
 ]);
 
 $app->register(new ServiceControllerServiceProvider());
+
+$app->register(new SecurityServiceProvider(), [
+    'security.firewalls' => [
+        'default' => [
+            'pattern' => '^/.*$',
+            'anonymous' => true,
+            'form' => ['login_path' => '/auth/login', 'check_path' => '/auth/login-check'],
+            'users' => function ($app) use ($app) {
+                return new UserService($app);
+            },
+        ]
+    ]
+]);
+
+// Security requires a boot
+$app->boot();
 
 $app->register(new TwigServiceProvider(), [
     'twig.path' => [

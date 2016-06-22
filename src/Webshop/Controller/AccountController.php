@@ -3,6 +3,7 @@
 namespace Webshop\Controller;
 
 use Silex\ControllerCollection;
+use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 
 class AccountController extends AbstractController
 {
@@ -26,6 +27,16 @@ class AccountController extends AbstractController
         return $controllers;
     }
 
+    public function index()
+    {
+
+    }
+
+    public function details()
+    {
+        
+    }
+
     public function login()
     {
 
@@ -33,6 +44,7 @@ class AccountController extends AbstractController
 
     public function register()
     {
-        
+        $encoder = new BCryptPasswordEncoder(13);
+        var_dump($encoder->encodePassword('abc', ''));
     }
 }

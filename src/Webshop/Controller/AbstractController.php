@@ -7,6 +7,9 @@ use Silex\Application;
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig_Environment;
 use Webshop\Model\Repository\AbstractRepository;
 
@@ -79,5 +82,28 @@ abstract class AbstractController implements ControllerProviderInterface
     public function redirect($url)
     {
         return $this->app->redirect($url);
+    }
+
+    /**
+     * @param UserInterface $user
+     *
+     * @return PasswordEncoderInterface
+     */
+    public function getEncoder(UserInterface $user)
+    {
+        return $this->app['security.encoder_factory']->getEncoder($user);
+    }
+
+    public function getLastError($request)
+    {
+        return $this->app['security.last_error']($request);
+    }
+
+    /**
+     * @return UsernamePasswordToken
+     */
+    public function getUserToken()
+    {
+        return $this->app['security.token_storage']->getToken();
     }
 }
