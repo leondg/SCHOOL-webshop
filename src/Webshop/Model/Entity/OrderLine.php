@@ -5,7 +5,7 @@ namespace Webshop\Model\Entity;
 class OrderLine implements EntityInterface
 {
     const STATUS_OK = 'ok';
-    
+
     /**
      * @var int
      */

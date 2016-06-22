@@ -78,7 +78,8 @@ class CheckoutController extends AbstractController
         $cart = $this->cartService->getItems();
 
         $orderId = $this->orderService->createFromCart($cart, 1, 3, 'default');
-        
-        var_dump($this->orderService->getOrderData($orderId));exit;
+
+        var_dump($this->orderService->getOrderData($orderId));
+        exit;
     }
 }

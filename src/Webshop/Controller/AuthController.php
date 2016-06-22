@@ -4,9 +4,6 @@ namespace Webshop\Controller;
 
 use Silex\ControllerCollection;
 use Symfony\Component\HttpFoundation\Request;
-use Webshop\Model\Repository\AccountRepository;
-use Webshop\Model\Repository\ProductRepository;
-use Webshop\Model\Service\UserService;
 
 class AuthController extends AbstractController
 {

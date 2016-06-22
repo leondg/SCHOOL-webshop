@@ -1,4 +1,5 @@
 <?php
+
 namespace Webshop\Model\Service;
 
 use Silex\Application;

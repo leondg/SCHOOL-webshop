@@ -1,7 +1,7 @@
 <?php
+
 namespace Webshop\Model\Service;
 
-use Doctrine\DBAL\DBALException;
 use Webshop\Model\Entity\Order;
 use Webshop\Model\Entity\OrderLine;
 use Webshop\Model\Entity\Product;
@@ -31,7 +31,7 @@ class OrderService
         $this->orderLineRepository = $orderLineRepository;
         $this->productRepository = $productRepository;
     }
-    
+
     public function getOrderData($id)
     {
         /** @var Order $order */
@@ -54,7 +54,7 @@ class OrderService
             'status' => Order::STATUS_WAIT,
             'paymentstatus' => Order::PAYMENT_STATUS_OPEN,
         ]);
-        
+
         $orderId = $this->orderRepository->getLastId();
 
         foreach ($cart as $key => $value) {
@@ -70,7 +70,7 @@ class OrderService
                     'status' => OrderLine::STATUS_OK,
                 ]);
 
-                $i++;
+                ++$i;
             }
         }
 
