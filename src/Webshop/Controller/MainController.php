@@ -63,6 +63,26 @@ class MainController extends AbstractController
         return $this->twig->render('main/desktops.twig', $context);
     }
 
+    /**
+     * @return string
+     */
+    public function laptops()
+    {
+        $context['products'] = $this->products->findByCategory('laptop');
+
+        return $this->twig->render('main/laptops.twig', $context);
+    }
+
+    /**
+     * @return string
+     */
+    public function tablets()
+    {
+        $context['products'] = $this->products->findByCategory('tablet');
+
+        return $this->twig->render('main/tablets.twig', $context);
+    }
+
     public function components()
     {
         return $this->twig->render('main/components.twig');

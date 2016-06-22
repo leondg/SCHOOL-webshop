@@ -14,6 +14,10 @@ body {
     height: 132px;
 }
 
+#header .glyphicon {
+    font-size: 40px;
+}
+
 .table tbody>tr>td.vert-align-middle {
     vertical-align: middle;
 }

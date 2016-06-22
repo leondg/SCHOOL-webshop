@@ -4,6 +4,16 @@ namespace Webshop\Model\Entity;
 
 class Order implements EntityInterface
 {
+    const STATUS_WAIT = 'wait';
+    const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_READY = 'ready';
+    const STATUS_IN_TRANSIT = 'in_transit';
+    const STATUS_COMPLETED = 'completed';
+
+    const PAYMENT_STATUS_OPEN = 'open';
+    const PAYMENT_STATUS_PENDING = 'pending';
+    const PAYMENT_STATUS_PAID = 'paid';
+
     /**
      * @var int
      */
