@@ -11,7 +11,7 @@ class OrderRepository extends AbstractRepository
      */
     public function tableName()
     {
-        return 'order';
+        return '`order`';
     }
 
     /**
@@ -20,5 +20,13 @@ class OrderRepository extends AbstractRepository
     public function tableClass()
     {
         return Order::class;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastId()
+    {
+        return $this->db->lastInsertId();
     }
 }

@@ -21,4 +21,21 @@ class AccountRepository extends AbstractRepository
     {
         return Account::class;
     }
+
+    public function findByUsername($username)
+    {
+        $record = $this->db->fetchAssoc(
+            sprintf(
+                'SELECT * FROM %s WHERE username = ? LIMIT 1',
+                $this->tableName()
+            ),
+            [(string) $username]
+        );
+
+        if (!$record) {
+            return;
+        }
+
+        return Account::deserialize($record);
+    }
 }

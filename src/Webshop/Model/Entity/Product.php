@@ -18,6 +18,10 @@ class Product implements EntityInterface
     /**
      * @var string
      */
+    private $fullName;
+    /**
+     * @var string
+     */
     private $brand;
     /**
      * @var string
@@ -55,6 +59,7 @@ class Product implements EntityInterface
     private function __construct(
         $id,
         $name,
+        $fullName,
         $brand,
         $category,
         $price,
@@ -67,6 +72,7 @@ class Product implements EntityInterface
     ) {
         $this->id = $id;
         $this->name = $name;
+        $this->fullName = $fullName;
         $this->brand = $brand;
         $this->category = $category;
         $this->price = $price;
@@ -88,6 +94,7 @@ class Product implements EntityInterface
         return new self(
             $data['id'],
             $data['name'],
+            $data['fullname'],
             $data['brand'],
             $data['category'],
             $data['price'],
@@ -108,6 +115,7 @@ class Product implements EntityInterface
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'fullname' => $this->fullName,
             'brand' => $this->brand,
             'category' => $this->category,
             'price' => $this->price,
@@ -115,8 +123,8 @@ class Product implements EntityInterface
             'stock' => $this->stock,
             'options' => $this->options,
             'status' => $this->status,
-            'createdOn' => $this->createdOn,
-            'updatedOn' => $this->updatedOn,
+            'createdon' => $this->createdOn,
+            'updatedon' => $this->updatedOn,
         ];
     }
 
@@ -134,6 +142,14 @@ class Product implements EntityInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->fullName;
     }
 
     /**

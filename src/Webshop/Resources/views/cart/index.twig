@@ -2,44 +2,54 @@
 
 {% block content %}
     {% if cartItems is empty %}
-    <div class="panel panel-default">
-        <div class="panel-body">Uw winkelwagen is leeg.</div>
-    </div>
-
+        <div class="panel panel-default">
+            <div class="panel-body">Uw winkelwagen is leeg.</div>
+        </div>
     {% else %}
-    <div class="panel panel-default">
-        <table class="table">
-            <caption>Winkelwagen</caption>
-            <thead>
-                <tr>
-                    <th>Product</th><th class="text-right">Prijs</th><th class="text-right">Aantal</th><th class="text-right">Totaal</th><th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cartItem in cartItems %}
-                <tr>
-                    <td>
-                        {{ cartItem.product.name }} <br/>
-                        <span class="text-muted">{{ cartItem.product.brand }}</span>
-                    </td>
-                    <td class="vert-align-middle text-right">
+        <div class="panel panel-default">
+            <table class="table table-cart">
+                <caption>Winkelwagen</caption>
+                <thead>
+                    <tr>
+                        <th colspan="2">Product</th><th class="text-right">Prijs</th><th class="text-right">Aantal</th><th class="text-right">Totaal</th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cartItem in cartItems %}
+                    <tr>
+                        <td class="cart-image">
+                            <img src="/images/products/{{ cartItem.product.brand }}/{{ cartItem.product.name }}_01.png">
+                        </td>
+                        <td class="vert-align-middle">
+                            <span class="text-muted">{{ cartItem.product.brand|capitalize }}</span><br/>
+                            <span>{{ cartItem.product.fullname }}</span>
+                        </td>
+                        <td class="vert-align-middle text-right">
+                            {{ price(cartItem.product.price) }}
+                        </td>
+                        <td class="vert-align-middle text-right cart-amount">
+                            <input class="" type="text" value="{{ cartItem.amount }}"/>
+                        </td>
+                        <td class="vert-align-middle text-right">
+                            {{ price(cartItem.price) }}
+                        </td>
+                        <td class="vert-align-middle text-center"><a href="{{ path('cart-remove', {id: cartItem.product.id}) }}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="text-right" colspan="4"><strong>Totaal: </strong></td><td class="text-right"><strong>{{ price(totalPrice) }}</strong></td><td></td>
+                    </tr>
+                </tfoot>
+            </table>
 
-                        {{ price(cartItem.product.price) }}
-                    </td>
-                    <td class="vert-align-middle text-right">
-                        <input type="text" value="{{ cartItem.amount }}"/>
-                    </td>
-                    <td class="vert-align-middle text-right">
-                        {{ price(cartItem.price) }}
-                    </td>
-                    <td class="vert-align-middle text-center"><a href="{{ path('cart-remove', {id: cartItem.product.id}) }}"><span class="glyphicon glyphicon-remove"></span></a></td>
-                </tr>
-                {% endfor %}
-                <tr>
-                    <td class="text-right" colspan="3"><strong>Totaal: </strong></td><td class="text-right"><strong>{{ price(totalPrice) }}</strong></td><td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+            <div class="panel-body">
+                <div class="pull-right">
+                    <a href="/checkout/login" class="btn btn-lg btn-success" role="button">Afrekenen</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}

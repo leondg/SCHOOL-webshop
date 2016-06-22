@@ -7,14 +7,14 @@ use Webshop\Exception\ProductNotEnabled;
 use Webshop\Exception\ProductNotFound;
 use Webshop\Model\Entity\Product;
 use Webshop\Model\Repository\ProductRepository;
-use Webshop\Model\Service\Cart;
+use Webshop\Model\Service\CartService;
 
 class CartController extends AbstractController
 {
     /**
-     * @var Cart
+     * @var CartService
      */
-    private $cart;
+    private $cartService;
 
     /**
      * @var ProductRepository
@@ -25,7 +25,7 @@ class CartController extends AbstractController
      */
     protected function init()
     {
-        $this->cart = new Cart($this->session);
+        $this->cartService = new CartService($this->session);
         $this->product = $this->getRepository('product');
     }
 
@@ -47,7 +47,7 @@ class CartController extends AbstractController
     {
         $cartItems = [];
         $totalPrice = 0;
-        foreach ($this->cart->getItems() as $key => $value) {
+        foreach ($this->cartService->getItems() as $key => $value) {
             /** @var Product $product */
             $product = $this->product->find($key);
             $price = $product->getPrice() * $value;
@@ -72,14 +72,14 @@ class CartController extends AbstractController
             throw new ProductNotEnabled('The product you are trying to add is not enabled.');
         }
 
-        $this->cart->addItem($id, 1);
+        $this->cartService->addItem($id, 1);
 
         return $this->redirect('/cart');
     }
 
     public function remove($id)
     {
-        $this->cart->removeItem($id);
+        $this->cartService->removeItem($id);
 
         return $this->redirect('/cart');
     }

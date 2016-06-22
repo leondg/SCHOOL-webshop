@@ -21,4 +21,22 @@ class OrderLineRepository extends AbstractRepository
     {
         OrderLine::class;
     }
+
+    public function findByOrderId($orderId)
+    {
+        $records = $this->db->fetchAll(
+            sprintf(
+                'SELECT * FROM %s WHERE order_id = ?',
+                $this->tableName()
+            ),
+            [(int) $orderId]
+        );
+
+        $orderLines = [];
+        foreach ($records as $record) {
+            $orderLines[] = OrderLine::deserialize($record);
+        }
+
+        return $orderLines;
+    }
 }
