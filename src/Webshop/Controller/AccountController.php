@@ -21,25 +21,28 @@ class AccountController extends AbstractController
      */
     protected function routes(ControllerCollection $controllers)
     {
+        $controllers->get('/', [$this, 'index'])->bind('account-index');
         $controllers->get('/login', [$this, 'login'])->bind('account-login');
         $controllers->get('/register', [$this, 'register'])->bind('account-register');
+        $controllers->get('/details', [$this, 'details'])->bind('account-details');
+        $controllers->get('/address', [$this,  'address'])->bind('account-address');
+        $controllers->get('/orders', [$this, 'orders'])->bind('account-orders');
+        $controllers->get('/wishlist', [$this, 'wishList'])->bind('account-wishlist');
 
         return $controllers;
     }
 
     public function index()
     {
-
+        return $this->render('account/index.twig');
     }
 
     public function details()
     {
-        
     }
 
     public function login()
     {
-
     }
 
     public function register()

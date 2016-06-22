@@ -1,0 +1,14 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ul>
+                <li><a href="{{ path('account-details') }}">Details</a></li>
+                <li><a href="{{ path('account-address') }}">Adres gegevens</a></li>
+                <li><a href="{{ path('account-orders') }}">Bestellingen</a></li>
+                <li><a href="{{ path('account-wishlist') }}">Wenslijst</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
