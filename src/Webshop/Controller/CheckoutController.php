@@ -5,6 +5,7 @@ namespace Webshop\Controller;
 use Silex\ControllerCollection;
 use Webshop\Model\Entity\PaymentMethod;
 use Webshop\Model\Repository\AccountRepository;
+use Webshop\Model\Repository\OrderRepository;
 use Webshop\Model\Repository\ProductRepository;
 use Webshop\Model\Service\AccountService;
 use Webshop\Model\Service\CartService;
@@ -21,6 +22,11 @@ class CheckoutController extends AbstractController
      * @var ProductRepository
      */
     private $products;
+
+    /**
+     * @var OrderRepository
+     */
+    private $order;
 
     /**
      * @var CartService
@@ -43,9 +49,10 @@ class CheckoutController extends AbstractController
     {
         $this->account = $this->getRepository('account');
         $this->products = $this->getRepository('product');
+        $this->order = $this->getRepository('order');
         $this->cartService = new CartService($this->session);
         $this->orderService = new OrderService(
-            $this->getRepository('order'),
+            $this->order,
             $this->getRepository('order_line'),
             $this->products
         );
@@ -66,6 +73,8 @@ class CheckoutController extends AbstractController
         $controllers->get('/login', [$this, 'login'])->bind('checkout-login');
         $controllers->get('/create', [$this, 'create'])->bind('checkout-create');
         $controllers->get('/overview/{orderId}', [$this, 'overview'])->bind('checkout-overview');
+        $controllers->get('/payment/{orderId}/{paymentMethodId}', [$this, 'payment'])->bind('checkout-payment');
+        $controllers->get('/complete/{orderId}', [$this, 'complete'])->bind('checkout-complete');
 
         return $controllers;
     }
@@ -106,5 +115,19 @@ class CheckoutController extends AbstractController
         $context['paymentMethods'] = $paymentMethods;
 
         return $this->render('checkout/overview.twig', $context);
+    }
+
+    public function payment($orderId, $paymentMethodId)
+    {
+        $this->order->update(['payment_method_id' => $paymentMethodId], ['id' => $orderId]);
+
+        return $this->redirect('/checkout/complete/'.$orderId);
+    }
+
+    public function complete($orderId)
+    {
+        $context['orderId'] = $orderId;
+
+        return $this->render('checkout/complete.twig', $context);
     }
 }

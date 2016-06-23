@@ -49,13 +49,15 @@
                             <p>Betaalmethode kiezen:</p>
                             {% for paymentMethod in paymentMethods %}
                                 <div class="col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/payment/{{ paymentMethod.name|lower }}_01.png">
-                                        <div class="caption">
-                                            {{ paymentMethod.name }}<br/>
-                                            <span class="text-muted small">{{ price(paymentMethod.price) }}</span>
+                                    <a href="/checkout/payment/{{ orderData.order.id }}/{{ paymentMethod.id }}">
+                                        <div class="thumbnail">
+                                            <img src="/images/payment/{{ paymentMethod.name|lower }}_01.png">
+                                            <div class="caption">
+                                                {{ paymentMethod.name }}<br/>
+                                                <span class="text-muted small">{{ price(paymentMethod.price) }}</span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             {% endfor %}
                         </div>
