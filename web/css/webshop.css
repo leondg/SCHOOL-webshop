@@ -73,6 +73,13 @@ body {
     max-height: 100%;
 }
 
+td > div.small-cart-name {
+    width: 68px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .table-cart .cart-image {
     width: 80px;
 }
