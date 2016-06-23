@@ -65,12 +65,18 @@ $app->register(new SecurityServiceProvider(), [
             'pattern' => '^/.*$',
             'anonymous' => true,
             'form' => ['login_path' => '/auth/login', 'check_path' => '/auth/login-check'],
+            'logout' => ['logout_path' => '/auth/logout', 'invalidate_session' => true],
             'users' => function ($app) use ($app) {
                 return new UserService($app);
             },
         ]
     ]
 ]);
+
+$app['security.access_rules'] = [
+    ['^/account/', 'ROLE_USER'],
+    ['^/checkout/', 'ROLE_USER'],
+];
 
 // Security requires a boot
 $app->boot();

@@ -1,14 +1,36 @@
 {% extends "layout.twig" %}
 
 {% block content %}
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form action="{{ path('auth-login-check') }}" method="post">
-                {{ error }}
-                <input type="text" name="_username" value="{{ last_username }}" />
-                <input type="password" name="_password" value="" />
-                <input type="submit" />
-            </form>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-signin" action="{{ path('auth-login-check') }}" method="post">
+                        {{ error }}
+                        <h2 class="form-signin-heading">Inloggen</h2>
+                        <label for="inputUsername" class="sr-only">Gebruikersnaam</label>
+                        <input type="text" id="inputUsername" class="form-control" name="_username" value="{{ last_username }}" placeholder="Gebruikersnaam" required autofocus>
+                        <label for="inputPassword" class="sr-only">Wachtwoord</label>
+                        <input type="password" id="inputPassword" class="form-control" name="_password" value="" placeholder="Password" required>
+                        {#<div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="remember-me"> Remember me
+                            </label>
+                        </div>#}
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2 class="form-signin-heading">Registreren</h2>
+                    Nog geen account?
+                    Klik hier om te registreren.
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

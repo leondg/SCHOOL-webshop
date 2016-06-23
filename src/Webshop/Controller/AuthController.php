@@ -34,8 +34,4 @@ class AuthController extends AbstractController
 
         return $this->render('auth/login.twig', $context);
     }
-
-    public function logout()
-    {
-    }
 }

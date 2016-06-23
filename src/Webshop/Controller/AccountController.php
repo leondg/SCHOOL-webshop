@@ -34,14 +34,12 @@ class AccountController extends AbstractController
 
     public function index()
     {
+        var_dump($this->getUserToken()->isAuthenticated());
+
         return $this->render('account/index.twig');
     }
 
     public function details()
-    {
-    }
-
-    public function login()
     {
     }
 

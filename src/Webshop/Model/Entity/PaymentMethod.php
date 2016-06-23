@@ -4,6 +4,9 @@ namespace Webshop\Model\Entity;
 
 class PaymentMethod implements EntityInterface
 {
+    const STATUS_ENABLED = 'enabled';
+    const STATUS_DISABLED = 'disabled';
+
     /**
      * @var int
      */
@@ -58,7 +61,7 @@ class PaymentMethod implements EntityInterface
      *
      * @return PaymentMethod
      */
-    public static function deserialize($data)
+    public static function deserialize(array $data)
     {
         return new self(
             $data['id'],
