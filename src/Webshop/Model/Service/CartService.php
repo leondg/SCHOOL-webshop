@@ -43,6 +43,19 @@ class CartService
         $this->session->set('cart', $this->cartItems);
     }
 
+    public function setItem($id, $amount)
+    {
+        if ($amount === 0) {
+            return;
+        }
+
+        if (isset($this->cartItems[$id])) {
+            $this->cartItems[$id] = $amount;
+        }
+
+        $this->session->set('cart', $this->cartItems);
+    }
+
     public function removeItem($id)
     {
         unset($this->cartItems[$id]);

@@ -28,7 +28,13 @@
                             {{ price(cartItem.product.price) }}
                         </td>
                         <td class="vert-align-middle text-right cart-amount">
-                            <input class="" type="text" value="{{ cartItem.amount }}"/>
+                            <form action="{{ path('cart-set') }}" method="post">
+                                <input type="text" name="cart-item-amount" value="{{ cartItem.amount }}">
+                                <input type="hidden" name="cart-item-id" value="{{ cartItem.product.id }}">
+                                <button type="submit" class="btn btn-success">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </button>
+                            </form>
                         </td>
                         <td class="vert-align-middle text-right">
                             {{ price(cartItem.price) }}
@@ -46,7 +52,7 @@
 
             <div class="panel-body">
                 <div class="pull-right">
-                    <a href="/checkout/login" class="btn btn-lg btn-success" role="button">Afrekenen</a>
+                    <a href="{{ path('checkout-create') }}" class="btn btn-lg btn-success" role="button">Afrekenen</a>
                 </div>
                 <div class="clearfix"></div>
             </div>

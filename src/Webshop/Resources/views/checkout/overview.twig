@@ -1,0 +1,95 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h4>Factuur adres:</h4>
+                            {% set billingBreak = false %}
+                            {% for address in accountData.addresses if not billingBreak %}
+                                {% if (address.status == 'both' or address.status == 'billing') %}
+                                    <p class="text-muted">{{ address.name }}</p>
+                                    <p>Straat: {{ address.street }} {{ address.number }}</p>
+                                    <p>Postcode: {{ address.zipCode }}</p>
+                                    <p>Woonplaats: {{ address.residence }}</p>
+                                    <p>Land: {{ address.country }}</p>
+
+                                    {% set billingBreak = true %}
+                                {% endif %}
+                            {% endfor %}
+                            <hr/>
+                            <h4>Aflever adres:</h4>
+                            {% set deliveryBreak = false %}
+                            {% for address in accountData.addresses if not deliveryBreak %}
+                                {% if (address.status == 'both' or address.status == 'delivery') %}
+                                    <p class="text-muted">{{ address.name }}</p>
+                                    <p>Straat: {{ address.street }} {{ address.number }}</p>
+                                    <p>Postcode: {{ address.zipCode }}</p>
+                                    <p>Woonplaats: {{ address.residence }}</p>
+                                    <p>Land: {{ address.country }}</p>
+
+                                    {% set deliveryBreak = true %}
+                                {% endif %}
+                            {% endfor %}
+                            <hr/>
+                            <a href="#">Adres wijzigen</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>Aantal producten: {{ orderData.orderLines|length }}</p>
+                            <p>Bedrag: {{ price(orderData.totalPrice) }}</p>
+                            <br/>
+                            <p>Betaalmethode kiezen:</p>
+                            {% for paymentMethod in paymentMethods %}
+                                <div class="col-md-3">
+                                    <div class="thumbnail">
+                                        <img src="/images/payment/{{ paymentMethod.name|lower }}_01.png">
+                                        <div class="caption">
+                                            {{ paymentMethod.name }}<br/>
+                                            <span class="text-muted small">{{ price(paymentMethod.price) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Product</th><th class="text-right">Aantal</th><th class="text-right">Totaal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in orderData.productList %}
+                                    <tr>
+                                        <td class="vert-align-middle">
+                                            <div class="small-cart-name">{{ item.product.fullname }}</div>
+                                        </td>
+                                        <td class="vert-align-middle text-right cart-amount">
+                                            {{ item.amount }}
+                                        </td>
+                                        <td class="vert-align-middle text-right">
+                                            {{ price(item.product.price * item.amount) }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

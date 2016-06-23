@@ -38,9 +38,33 @@ class OrderService
         $order = $this->orderRepository->find($id);
         $orderLines = $this->orderLineRepository->findByOrderId($order->getId());
 
+        $totalPrice = 0;
+        $productList = [];
+        /** @var OrderLine $orderLine */
+        foreach ($orderLines as $orderLine) {
+            /** @var Product $product */
+            $product = $this->productRepository->find($orderLine->getProductId());
+            $productId = $product->getId();
+
+            $totalPrice += $product->getPrice();
+
+            if ($productList[$productId]) {
+                $productList[$productId]['amount'] += 1;
+
+                continue;
+            }
+
+            $productList[$productId] = [
+                'product' => $product,
+                'amount' => 1,
+            ];
+        }
+
         return [
             'order' => $order,
             'orderLines' => $orderLines,
+            'productList' => $productList,
+            'totalPrice' => $totalPrice,
         ];
     }
 
